@@ -1,5 +1,12 @@
-<table>
-  <tr *ngFor="let station of trainStations">
-    <td>{{station}}</td>
-  </tr>
-</table>
+<mat-grid-list cols="{{boroughs.length}}" rowHeight="400px">
+  <div class="boroughs">
+    <mat-grid-tile *ngFor="let borough of boroughs">
+      <table>
+        <th>{{borough | titlecase}}</th>
+        <tr *ngFor="let station of trainStations[borough]">
+          <td>{{station}}</td>
+        </tr>
+      </table>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>

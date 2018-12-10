@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
-import { MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatSidenavModule, MatToolbarModule, MatGridListModule } from '@angular/material';
 import { TrainDetailsComponent } from './train-details/train-details.component';
 import { TrainsComponent } from './trains/trains.component'
 
@@ -19,7 +20,9 @@ import { TrainsComponent } from './trains/trains.component'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     MatToolbarModule,
+    MatGridListModule,
     MatSidenavModule
   ],
   providers: [],

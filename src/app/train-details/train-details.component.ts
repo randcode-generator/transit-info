@@ -10,8 +10,8 @@ import { TrainService } from '../train.service';
 
 export class TrainDetailsComponent implements OnInit {
 
-  selectedTrain = ""
-  trainStations = []
+  trainStations = {}
+  boroughs = []
   constructor(
     private trainService: TrainService,
     private route: ActivatedRoute,
@@ -25,8 +25,10 @@ export class TrainDetailsComponent implements OnInit {
 
   getTrainDetails(): void {
     const trainID = this.route.snapshot.paramMap.get('trainID');
-    this.selectedTrain = trainID
     this.trainService.getTrainStations(trainID)
-      .subscribe(trainStations => this.trainStations = trainStations)
+      .subscribe(trainStations => {
+        this.trainStations = trainStations
+        this.boroughs = Object.keys(trainStations)
+      })
   }
 }
