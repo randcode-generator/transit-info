@@ -1,16 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { TrainDetailsComponent } from './train-details/train-details.component';
+import { TrainsComponent } from './trains/trains.component'
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TrainDetailsComponent,
+    TrainsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

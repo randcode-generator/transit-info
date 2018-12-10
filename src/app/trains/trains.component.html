@@ -1,0 +1,11 @@
+<table>
+  <tr *ngFor="let train of trains">
+    <td>
+      <div [class.selected]="train == selectedTrain">
+        <a routerLink="/train/{{train}}">
+          <img src="assets/{{train}}.svg" height="50px" width="50px">
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
