@@ -1,12 +1,18 @@
-<mat-grid-list cols="{{boroughs.length}}" rowHeight="400px">
-  <div class="boroughs">
-    <mat-grid-tile *ngFor="let borough of boroughs">
-      <table>
-        <th>{{borough | titlecase}}</th>
-        <tr *ngFor="let station of trainStations[borough]">
-          <td>{{station}}</td>
-        </tr>
-      </table>
-    </mat-grid-tile>
-  </div>
-</mat-grid-list>
+<div *ngIf="boroughs.length > 0">
+  <mat-grid-list cols="{{boroughs.length}}" rowHeight="400px">
+    <div class="boroughs">
+      <mat-grid-tile *ngFor="let borough of boroughs">
+        <table>
+          <th>{{borough | titlecase}}</th>
+          <tr *ngFor="let station of trainStations[borough]">
+            <td>{{station}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+</div>
+
+<div *ngIf="boroughs.length == 0">
+  <h1 class="default-text">Select a train on the left</h1>
+</div>
