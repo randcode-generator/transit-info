@@ -17,7 +17,7 @@ export class TrainsComponent implements OnInit {
   selectedTrain = ""
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(_ => {
       this.getSelectedTrain()
     })
   }

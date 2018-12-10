@@ -21,7 +21,7 @@ export class TrainDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(_ => {
       this.getTrainDetails()
     })
   }
