@@ -12,6 +12,9 @@ export class TrainDetailsComponent implements OnInit {
 
   trainStations = {}
   boroughs = []
+  selectedStation = ""
+  train = ""
+
   constructor(
     private trainService: TrainService,
     private route: ActivatedRoute,
@@ -24,11 +27,16 @@ export class TrainDetailsComponent implements OnInit {
   }
 
   getTrainDetails(): void {
-    const trainID = this.route.snapshot.paramMap.get('trainID');
-    this.trainService.getTrainStations(trainID)
+    this.selectedStation = ""
+    this.train = this.route.snapshot.paramMap.get('trainID')
+    this.trainService.getTrainStations(this.train)
       .subscribe(trainStations => {
         this.trainStations = trainStations
         this.boroughs = Object.keys(trainStations)
       })
+  }
+
+  onStationClick(station:string): void {
+    this.selectedStation = station
   }
 }

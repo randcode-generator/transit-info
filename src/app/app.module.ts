@@ -6,15 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatSidenavModule, MatToolbarModule, MatGridListModule } from '@angular/material';
+import { MatSidenavModule, MatToolbarModule, MatGridListModule, MatCardModule, MatButtonModule } from '@angular/material';
 import { TrainDetailsComponent } from './train-details/train-details.component';
-import { TrainsComponent } from './trains/trains.component'
+import { TrainsComponent } from './trains/trains.component';
+import { StationDetailComponent } from './station-detail/station-detail.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     TrainDetailsComponent,
-    TrainsComponent
+    TrainsComponent,
+    StationDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,9 @@ import { TrainsComponent } from './trains/trains.component'
     HttpClientModule,
     MatToolbarModule,
     MatGridListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

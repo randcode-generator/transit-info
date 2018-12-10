@@ -1,0 +1,9 @@
+<div *ngIf="station.length > 0">
+  <mat-card>
+    <img src="assets/{{train}}.svg" height="20px" width="20px">
+      &nbsp;{{station}}
+      <mat-card-actions>
+        <button mat-button (click)="close()">CLOSE</button>
+      </mat-card-actions>
+  </mat-card>
+</div>
