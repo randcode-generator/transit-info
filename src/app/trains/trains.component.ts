@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FilterService } from '../filter.service';
+import { Store } from '@ngrx/store';
+import { appState } from '../ngrx/appState'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-trains',
@@ -9,18 +11,21 @@ import { FilterService } from '../filter.service';
 })
 export class TrainsComponent implements OnInit {
 
+  filterText: Observable<appState>
+
   constructor(
     private route: ActivatedRoute,
-    public filterService: FilterService
+    private store: Store<appState>
   ) {
+    this.filterText = this.store.select('filterTrainLines')
+    this.filterText.subscribe(val => {
+      this.trains = this.allTrains;
+      if(val.filterText.length > 0)
+        this.trains = this.trains.filter(element => element===val.filterText)
+    })
 
     this.route.paramMap.subscribe(_ => {
       this.getSelectedTrain()
-    })
-    this.filterService.filterConsume$.subscribe(filterText => {
-      this.trains = this.allTrains;
-      if(filterText.length > 0)
-        this.trains = this.trains.filter(element => element===filterText)
     })
   }
 

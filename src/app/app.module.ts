@@ -12,6 +12,9 @@ import { TrainsComponent } from './trains/trains.component';
 import { StationDetailComponent } from './station-detail/station-detail.component';
 import { FilterComponent } from './filter/filter.component'
 
+import { StoreModule } from '@ngrx/store';
+import { filterReducer } from './ngrx/reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,10 @@ import { FilterComponent } from './filter/filter.component'
     MatGridListModule,
     MatSidenavModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    StoreModule.forRoot({
+      filterTrainLines: filterReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
