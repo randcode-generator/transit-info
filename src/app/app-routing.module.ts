@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { FrontTemplateComponent } from './front-template/front-template.component';
 
 const routes: Routes = [
-  { path: 'train/:trainID', component: AppComponent },
+  { path: '', component: FrontTemplateComponent},
+  { path: 'train/:trainID', component: FrontTemplateComponent },
   { path: '**', redirectTo: '' }
 ];
 
