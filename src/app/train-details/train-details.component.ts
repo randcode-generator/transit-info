@@ -37,8 +37,12 @@ export class TrainDetailsComponent implements OnInit {
       this.boroughs.forEach(x => {
         let stationArr = this.trainStationsOrigin[x]
         let filterText = val.filterText.toLowerCase()
-        this.trainStations[x] = stationArr.filter(
-                  g => g.toLowerCase().includes(filterText))
+        if(filterText.length == 0) {
+          this.trainStations[x] = stationArr
+        } else {
+          this.trainStations[x] = stationArr.filter(
+            station => station.toLowerCase().includes(filterText))
+        }
       })
     })
   }
