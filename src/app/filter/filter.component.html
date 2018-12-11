@@ -1,1 +1,7 @@
-<input size="5" maxlength="1" type="text" placeholder="Filter" #filter (keyup)="filter.value = filter.value.toUpperCase(); filterTrain(filter.value)">
+<div *ngIf="type=='train'">
+  <input size="5" maxlength="1" type="text" placeholder="Filter" #filter (keyup)="filter.value = filter.value.toUpperCase(); filterTrain(filter.value)">
+</div>
+
+<div *ngIf="type=='station'" style="padding-left: 10px">
+  <input size="20" maxlength="20" type="text" placeholder="Filter Station" #filter (keyup)="filterStation(filter.value)">
+</div>

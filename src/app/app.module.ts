@@ -13,7 +13,7 @@ import { StationDetailComponent } from './station-detail/station-detail.componen
 import { FilterComponent } from './filter/filter.component'
 
 import { StoreModule } from '@ngrx/store';
-import { filterReducer } from './ngrx/reducer';
+import { filterStationReducer, filterTrainReducer } from './ngrx/reducer';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { filterReducer } from './ngrx/reducer';
     MatCardModule,
     MatButtonModule,
     StoreModule.forRoot({
-      filterTrainLines: filterReducer
+      filterTrainLines: filterTrainReducer,
+      filterTrainStation: filterStationReducer
     })
   ],
   providers: [],
