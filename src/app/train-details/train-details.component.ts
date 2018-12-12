@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { appState } from '../ngrx/appState';
 import { Observable } from 'rxjs';
 import * as actions from '../ngrx/actions';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-train-details',
@@ -19,6 +20,7 @@ export class TrainDetailsComponent implements OnInit {
   boroughs = []
   selectedStation = ""
   train = ""
+  error:HttpErrorResponse = null
   filterText: Observable<appState>
 
   constructor(
@@ -59,7 +61,9 @@ export class TrainDetailsComponent implements OnInit {
         this.boroughs.forEach(x => {
           this.trainStations[x] = trainStations[x]
         })
-      })
+      },
+      err => this.error = err
+      )
   }
 
   onStationClick(station:string): void {

@@ -1,3 +1,8 @@
+<ng-container *ngIf="error != null">
+  Something went wrong. Here's the error message 
+  <p><b>{{error.message}}</b></p>
+</ng-container>
+
 <app-station-detail [station]="selectedStation" [train]="train"></app-station-detail>
 <br>
 <div *ngIf="boroughs.length > 0">
