@@ -3,6 +3,7 @@ import * as actions from './actions';
 import { appState } from './appState';
 
 const defaultState: appState = {
+	type:"",
   filterText: ""
 }
 
@@ -15,7 +16,7 @@ const newState = (state, newData) => {
 export function filterTrainReducer(state: appState = defaultState, action: Action) {
   switch (action.type) {
 		case actions.FILTER_TRAIN_TEXT:
-		  return state = newState(state, {filterText: (action as actions.FilterTrainText).payload})
+		  return state = newState(state, {type: actions.FILTER_TRAIN_TEXT, filterText: (action as actions.FilterTrainText).payload})
 
 		default:
 			return state;
@@ -25,7 +26,9 @@ export function filterTrainReducer(state: appState = defaultState, action: Actio
 export function filterStationReducer(state: appState = defaultState, action: Action) {
   switch (action.type) {
 		case actions.FILTER_STATION_TEXT:
-		  return state = newState(state, {filterText: (action as actions.FilterStationText).payload})
+		  return state = newState(state, {type: actions.FILTER_STATION_TEXT, filterText: (action as actions.FilterStationText).payload})
+		case actions.FILTER_STATION_CLEAR_TEXT:
+			return state = newState(state, {type: actions.FILTER_STATION_CLEAR_TEXT, filterText: ""});
 
 		default:
 			return state;

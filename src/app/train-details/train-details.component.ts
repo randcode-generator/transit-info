@@ -4,6 +4,7 @@ import { TrainService } from '../train.service';
 import { Store } from '@ngrx/store';
 import { appState } from '../ngrx/appState';
 import { Observable } from 'rxjs';
+import * as actions from '../ngrx/actions';
 
 @Component({
   selector: 'app-train-details',
@@ -29,6 +30,7 @@ export class TrainDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(_ => {
       this.getTrainDetails()
+      this.store.dispatch(new actions.FilterStationClearText())
     })
 
     this.filterText = this.store.select('filterTrainStation')

@@ -3,5 +3,5 @@
 </div>
 
 <div *ngIf="type=='station'" style="padding-left: 10px">
-  <input size="20" maxlength="20" type="text" placeholder="Filter Station" #filter (keyup)="filterStation(filter.value)">
+  <input size="20" maxlength="20" type="text" placeholder="Filter Station" #filter (keyup)="filterStation(filter.value)" [(ngModel)]="filterTextValue">
 </div>
