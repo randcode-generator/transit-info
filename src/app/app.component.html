@@ -1,6 +1,9 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span>Transit Info</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button class="buttons" (click)="buttonClicked('/')">Home</button>
+    <button mat-raised-button class="buttons" (click)="buttonClicked('/about')">About</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

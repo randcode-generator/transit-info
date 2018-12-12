@@ -16,6 +16,7 @@ import { FilterComponent } from './filter/filter.component'
 import { StoreModule } from '@ngrx/store';
 import { filterStationReducer, filterTrainReducer } from './ngrx/reducer';
 import { FrontTemplateComponent } from './front-template/front-template.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FrontTemplateComponent } from './front-template/front-template.componen
     TrainsComponent,
     StationDetailComponent,
     FilterComponent,
-    FrontTemplateComponent
+    FrontTemplateComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
