@@ -30,7 +30,8 @@ export class TrainDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(_ => {
+    this.route.paramMap.subscribe(x => {
+      this.train = x.get('trainID')
       this.getTrainDetails()
       this.store.dispatch(new actions.FilterStationClearText())
     })
@@ -57,7 +58,6 @@ export class TrainDetailsComponent implements OnInit {
     this.boroughs = []
     this.trainStations = {}
     this.trainStationsOrigin = {}
-    this.train = this.route.snapshot.paramMap.get('trainID')
     this.trainService.getTrainStations(this.train)
       .subscribe(trainStations => {
         this.trainStationsOrigin = trainStations
