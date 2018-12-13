@@ -15,7 +15,7 @@ import { filterTrainReducer, filterStationReducer } from '../ngrx/reducer';
 import { ActivatedRoute } from '@angular/router';
 
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
-import { ReplaySubject, Observable, of } from 'rxjs';
+import { ReplaySubject, Observable, of, throwError } from 'rxjs';
 import { TrainService } from '../train.service';
 
 export class ActivatedRouteStub {
@@ -46,10 +46,11 @@ export class TestTrainService extends TrainService {
       })      
     } else {
       const errorResponse = new HttpErrorResponse({
+        url: "testing/"+train,
         status: 404, statusText: 'Not Found'
       });
 
-      throw errorResponse
+      return throwError(errorResponse)
     }
   }
 }
@@ -145,9 +146,8 @@ function UnknownTrainTest() {
   
   it('Unknown train input', () => {
     const compiled = fixture.debugElement.nativeElement;
-    console.log(compiled)
-    // expect(compiled.textContent)
-    //   .toContain("86th")
+    expect(compiled.textContent)
+      .toContain("404 Not Found")
   });
 }
 
