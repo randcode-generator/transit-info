@@ -27,10 +27,12 @@ export class TrainDetailsComponent implements OnInit {
     private trainService: TrainService,
     private route: ActivatedRoute,
     private store: Store<appState>
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(_ => {
+    this.route.paramMap.subscribe(x => {
+      this.train = x.get('trainID')
       this.getTrainDetails()
       this.store.dispatch(new actions.FilterStationClearText())
     })
@@ -53,7 +55,6 @@ export class TrainDetailsComponent implements OnInit {
 
   getTrainDetails(): void {
     this.selectedStation = ""
-    this.train = this.route.snapshot.paramMap.get('trainID')
     this.trainService.getTrainStations(this.train)
       .subscribe(trainStations => {
         this.trainStationsOrigin = trainStations
