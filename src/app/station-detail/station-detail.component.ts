@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StationDetailComponent implements OnInit {
 
-  @Input() station: string;
-  @Input() train: string;
+  @Input() station: string = "";
+  @Input() train: string = "";
 
   close(): void {
     this.station = ""
