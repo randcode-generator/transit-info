@@ -11,32 +11,77 @@ import { TrainDetailsComponent } from '../train-details/train-details.component'
 import { StationDetailComponent } from '../station-detail/station-detail.component';
 import { StoreModule } from '@ngrx/store';
 import { filterTrainReducer, filterStationReducer } from '../ngrx/reducer';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '../testObjs/ActivatedRouteStub';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('TrainsComponent', () => {
+let declarations = [ 
+  TrainDetailsComponent,
+  StationDetailComponent,
+  FilterComponent,
+  FrontTemplateComponent,
+  AboutComponent,
+  TrainsComponent
+]
+
+let imports = [
+  MatGridListModule,
+  MatCardModule,
+  FormsModule,
+  HttpClientModule,
+  AppRoutingModule,
+  MatSidenavModule,
+  StoreModule.forRoot({
+    filterTrainLines: filterTrainReducer,
+    filterTrainStation: filterStationReducer
+  })
+]
+
+function providers(trainID: string) {
+  let activatedRoute = new ActivatedRouteStub({"trainID":trainID});
+  return [
+    { provide: ActivatedRoute, useValue: activatedRoute }
+  ]
+}
+
+let filterFunc = (train:string, component: TrainsComponent,
+                  fixture: ComponentFixture<TrainsComponent>) => {
+  let compiled = fixture.debugElement.nativeElement
+  var inputfield = compiled.querySelector('input') as HTMLInputElement
+  inputfield.value = train
+  inputfield.dispatchEvent(new Event('keyup', {}));
+  fixture.detectChanges()
+  fixture.whenStable().then(()=> {
+    let arr:string[] = []
+    arr.push(train)
+    expect(component.trains).toEqual(arr)
+  })
+}
+
+let shouldBeSelected = (train:string, fixture: ComponentFixture<TrainsComponent>) => {
+  let compiled = fixture.debugElement.nativeElement
+  let text = compiled.querySelector('#'+train)
+  let classList = text.classList
+  expect(Object.keys(classList).length).toEqual(1)
+  expect(classList).toContain("selected")
+}
+
+let shouldNotBeSelected = (train:string, fixture: ComponentFixture<TrainsComponent>) => {
+  let compiled = fixture.debugElement.nativeElement
+  let text = compiled.querySelector('#'+train)
+  let classList = text.classList
+  expect(Object.keys(classList).length).toEqual(0)
+}
+
+let DTrainRoute = () => {
   let component: TrainsComponent;
   let fixture: ComponentFixture<TrainsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        AppRoutingModule,
-        FormsModule,
-        MatSidenavModule,
-        MatGridListModule,
-        MatCardModule,
-        StoreModule.forRoot({
-          filterTrainLines: filterTrainReducer,
-          filterTrainStation: filterStationReducer
-        })
-      ],
-      declarations: [ 
-        TrainsComponent,
-        FilterComponent,
-        FrontTemplateComponent,
-        AboutComponent,
-        TrainDetailsComponent,
-        StationDetailComponent
-      ]
+      imports: imports,
+      declarations: declarations,
+      providers: providers("D")
     })
     .compileComponents();
   }));
@@ -47,7 +92,97 @@ describe('TrainsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('D train should be selected', () => {
+    shouldBeSelected("D", fixture)
   });
+
+  it('N train should not be selected', () => {
+    shouldNotBeSelected("N", fixture)
+  });
+
+  it('Filter N', () => {
+    filterFunc("N", component, fixture)
+  });
+
+  it('Filter D', () => {
+    filterFunc("D", component, fixture)
+  });
+}
+
+let NTrainRoute = () => {
+  let component: TrainsComponent;
+  let fixture: ComponentFixture<TrainsComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: imports,
+      declarations: declarations,
+      providers: providers("N")
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TrainsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('D train should not be selected', () => {
+    shouldNotBeSelected("D", fixture)
+  });
+
+  it('N train should be selected', () => {
+    shouldBeSelected("N", fixture)
+  });
+
+  it('Filter N', () => {
+    filterFunc("N", component, fixture)
+  });
+
+  it('Filter D', () => {
+    filterFunc("D", component, fixture)
+  });
+}
+
+let UnknownTrainRoute = () => {
+  let component: TrainsComponent;
+  let fixture: ComponentFixture<TrainsComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: imports,
+      declarations: declarations,
+      providers: providers("")
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TrainsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('D train should not be selected', () => {
+    shouldNotBeSelected("D", fixture)
+  });
+
+  it('N train should not be selected', () => {
+    shouldNotBeSelected("N", fixture)
+  });
+
+  it('Filter N', () => {
+    filterFunc("N", component, fixture)
+  });
+
+  it('Filter D', () => {
+    filterFunc("D", component, fixture)
+  });
+}
+
+describe('TrainsComponent', () => {
+  describe('When route is D train', DTrainRoute);
+  describe('When route is N train', NTrainRoute);
+  describe('When route is unknown', UnknownTrainRoute);
 });
