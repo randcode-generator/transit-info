@@ -24,8 +24,8 @@ export class TrainsComponent implements OnInit {
         this.trains = this.trains.filter(element => element===val.filterText)
     })
 
-    this.route.paramMap.subscribe(_ => {
-      this.getSelectedTrain()
+    this.route.paramMap.subscribe(x => {
+      this.selectedTrain = x.get('trainID')
     })
   }
 
@@ -34,10 +34,5 @@ export class TrainsComponent implements OnInit {
   selectedTrain = ""
 
   ngOnInit() {
-  }
-
-  getSelectedTrain(): void {
-    const trainID = this.route.snapshot.paramMap.get('trainID');
-    this.selectedTrain = trainID
   }
 }
